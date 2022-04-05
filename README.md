@@ -156,14 +156,14 @@
 ```sql
     SELECT *
     FROM customers
-* WHERE state = 'VA' OR state = 'GA' OR state = 'FL'
+    # WHERE state = 'VA' OR state = 'GA' OR state = 'FL'
     WHERE state IN ('VA', 'FL', 'GA');
 ```
 
 ```sql
     SELECT *
     FROM customers
-* WHERE state = 'VA' OR state = 'GA' OR state = 'FL'
+    # WHERE state = 'VA' OR state = 'GA' OR state = 'FL'
     WHERE state NOT IN ('VA', 'FL', 'GA');
     SELECT *
     FROM products
@@ -225,7 +225,7 @@
     WHERE last_name LIKE '_y';
 ```
 
-- VALUE = '\_\_\_A' -> stringin ilk 4 elemanı herhangi bir şey olabilir bir sonraki karakteri A veya a olmalı,
+- VALUE = '\_\_\_A' -> stringin ilk 3 elemanı herhangi bir şey olabilir bir sonraki karakteri A veya a olmalı,
 
 ```sql
     SELECT *
@@ -241,7 +241,7 @@
     WHERE last_name LIKE 'b____y';
 ```
 
-\*EXamples
+# EXAMPLES
 
 ```sql
     SELECT *

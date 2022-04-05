@@ -1,12 +1,12 @@
 - -- ile satır açıklama satırı olarak nitelendirilebilir.
 
-# USE metodu kullanılacak veri tabanını seçmemize yarar.
+### USE metodu kullanılacak veri tabanını seçmemize yarar.
 
 ```sql
     USE store;
 ```
 
-# ORDER BY (argüman) -> tablonun argümanına göre sıralamak için,
+### ORDER BY (argüman) -> tablonun argümanına göre sıralamak için,
 
 ```sql
     SELECT *
@@ -15,9 +15,9 @@
     ORDER BY phone;
 ```
 
-# SELECT (argüman) seçilecek table sütünu { info: " (\*) ise tüm sütünlar " },
+### SELECT (argüman) seçilecek table sütünu { info: " (\*) ise tüm sütünlar " },
 
-# FROM (argüman) -> argümana göre hangi tablo seçimi,
+### FROM (argüman) -> argümana göre hangi tablo seçimi,
 
 ```sql
     SELECT customer_id, first_name, points
@@ -25,11 +25,11 @@
     WHERE customer_id = 1;
 ```
 
-# Direkt olarak matematiksel işlemler uygulanabilir. AS ile set name
+### Direkt olarak matematiksel işlemler uygulanabilir. AS ile set name
 
-# AS (argüman) -> değişken (argüman) olarak tanımlanması için,
+### AS (argüman) -> değişken (argüman) olarak tanımlanması için,
 
-    # argüman da boşluk girmek için tırnak içerisinde olmalı,
+- argüman da boşluk girmek için tırnak içerisinde olmalı,
 
 ```sql
     SELECT
@@ -42,7 +42,7 @@
     FROM customers;
 ```
 
-# store.customers altındaki id'si 1 olan elemanın city değerinin "Waltham" olarak set et.
+### store.customers altındaki id'si 1 olan elemanın city değerinin "Waltham" olarak set et.
 
 ```sql
     SELECT state FROM customers;
@@ -50,7 +50,7 @@
     UPDATE `store`.`customers` SET `city` = 'Waltham' WHERE (`customer_id` = '1');
 ```
 
-# DISTINCT -> ile eşşiz elemanları getirmek için,
+### DISTINCT -> ile eşşiz elemanları getirmek için,
 
 ```sql
     SELECT DISTINCT state FROM customers;
@@ -63,39 +63,54 @@
     FROM products;
 ```
 
-# Comparison Opretors ->
+### Comparison Opretors ->
 
-    # > (gt),
-    # >= (gte),
-    # < (lt),
-    # <= (lte),
-    # = (equality),
-    # != (not equal), <> (not equal)
+- (>) (gt),
+- (>=) (gte),
+- (<) (lt),
+- (<=) (lte),
+- (=) (equality),
+- (!=) (not equal), <> (not equal)
 
-# WHERE (argüman) -> tablonun argümanına göre şartlı seçme için,
+### WHERE (argüman) -> tablonun argümanına göre şartlı seçme için,
 
 ```sql
-    SELECT _
+    SELECT *
     FROM customers
     WHERE points > 3000;
-    SELECT _
+```
+
+```sql
+    SELECT *
     FROM customers
     WHERE state = 'va';
-    SELECT _
+```
+
+```sql
+    SELECT *
     FROM customers
     WHERE state != 'va';
-    SELECT _
+```
+
+```sql
+    SELECT *
     FROM customers
     WHERE state <> 'va';
-    SELECT _
+```
+
+```sql
+    SELECT *
     FROM customers
     WHERE birth_date > '1995-01-01';
-    SELECT _
+```
+
+```sql
+    SELECT *
     FROM orders
     WHERE order_date >= '2019-01-01';
 ```
 
-# AND (Tüm şartlar doğru ise), OR (En az biri doğru ise) & NOT ()
+### AND (Tüm şartlar doğru ise), OR (En az biri doğru ise) & NOT ()
 
 ```sql
     SELECT *
@@ -109,7 +124,7 @@
     WHERE birth_date > '1990-01-01' OR points > 1000;
 ```
 
-# AND operator ilk çalışır sonrasında OR çalışır öncelik sırasından dolayı
+### AND operator ilk çalışır sonrasında OR çalışır öncelik sırasından dolayı
 
 ```sql
     SELECT *
@@ -117,7 +132,7 @@
     WHERE birth_date > '1990-01-01' OR points > 1000 AND state = 'VA';
 ```
 
-# NOT ile parantez önemli şartı sağlamayanlar gelecek...
+### NOT ile parantez önemli şartı sağlamayanlar gelecek...
 
 ```sql
     SELECT *
@@ -125,46 +140,46 @@
     WHERE NOT (birth_date > '1990-01-01' OR points > 1000);
 ```
 
-# Yukarısı ile aynı NOT parantez içine dağıldı.
+### Yukarısı ile aynı NOT parantez içine dağıldı.
 
 ```sql
-    SELECT _
+    SELECT *
     FROM customers
     WHERE birth_date <= '1990-01-01' AND points <= 1000;
-    SELECT _
+    SELECT *
     FROM order_items
     WHERE order_id = 6 AND unit_price * quantity > 30;
 ```
 
-# IN operators -> Birden fazla (veya) sorgu da kullanılır
+### IN operators -> Birden fazla (veya) sorgu da kullanılır
 
 ```sql
-    SELECT _
+    SELECT *
     FROM customers
-    # WHERE state = 'VA' OR state = 'GA' OR state = 'FL'
+* WHERE state = 'VA' OR state = 'GA' OR state = 'FL'
     WHERE state IN ('VA', 'FL', 'GA');
 ```
 
 ```sql
-    SELECT _
+    SELECT *
     FROM customers
-    # WHERE state = 'VA' OR state = 'GA' OR state = 'FL'
+* WHERE state = 'VA' OR state = 'GA' OR state = 'FL'
     WHERE state NOT IN ('VA', 'FL', 'GA');
     SELECT *
     FROM products
     WHERE quantity_in_stock IN (49, 38, 72);
 ```
 
-# BETWEEN OPERATOR -> BETWEEN (GTE) AND (LTE)
+### BETWEEN OPERATOR -> BETWEEN (GTE) AND (LTE)
 
 ```sql
-    SELECT _
+    SELECT *
     FROM customers
     WHERE points >= 1000 AND points <= 3000;
 ```
 
 ```sql
-    SELECT _
+    SELECT *
     FROM customers
     WHERE points BETWEEN 1000 AND 3000;
 ```
@@ -175,27 +190,25 @@
     WHERE birth_date BETWEEN '1990-01-01' AND '2000-01-01';
 ```
 
-# LIKE OPERATOR LIKE (VALUE) {info (%): any number of characters, info (\_): single character }
+### LIKE OPERATOR LIKE (VALUE) {info (%): any number of characters, info (\_): single character }
 
-    # VALUE = 'A%' -> string A veya a ile başlayanları,
+- VALUE = 'A%' -> string A veya a ile başlayanları,
 
 ```sql
     SELECT *
     FROM customers
     WHERE last_name LIKE 'b%';
-
 ```
 
-    # VALUE = '%A' -> string A veya a ile bitenleri,
+- VALUE = '%A' -> string A veya a ile bitenleri,
 
 ```sql
     SELECT *
     FROM customers
     WHERE last_name LIKE '%Y';
-
 ```
 
-    # VALUE = '%A%' -> string A veya a'yı HERHANGİ BİR YERİNDE içerenleri,
+- VALUE = '%A%' -> string A veya a'yı HERHANGİ BİR YERİNDE içerenleri,
 
 ```sql
     SELECT *
@@ -204,16 +217,15 @@
 
 ```
 
-    # VALUE = '_A' -> stringin UNDERSCORE kadar elemanları herhangi bir şey olabilir bir sonraki karakteri A veya a olmalı,
+- VALUE = '\_A' -> stringin UNDERSCORE kadar elemanları herhangi bir şey olabilir bir sonraki karakteri A veya a olmalı,
 
 ```sql
     SELECT *
     FROM customers
     WHERE last_name LIKE '_y';
-
 ```
 
-    # VALUE = '___A' -> stringin ilk 4 elemanı herhangi bir şey olabilir bir sonraki karakteri A veya a olmalı,
+- VALUE = '\_\_\_A' -> stringin ilk 4 elemanı herhangi bir şey olabilir bir sonraki karakteri A veya a olmalı,
 
 ```sql
     SELECT *
@@ -221,7 +233,7 @@
     WHERE last_name LIKE '____y';
 ```
 
-    # VALUE = 'b__A' -> stringin ilk elemanı b veya B olurken 2., 3. ve 4. elemanı herhangi bir şey olabilir ve bir sonraki karakteri A veya a olmalı,
+- VALUE = 'b\_\_A' -> stringin ilk elemanı b veya B olurken 2., 3. ve 4. elemanı herhangi bir şey olabilir ve bir sonraki karakteri A veya a olmalı,
 
 ```sql
     SELECT *
@@ -229,7 +241,7 @@
     WHERE last_name LIKE 'b____y';
 ```
 
-    #EXamples
+\*EXamples
 
 ```sql
     SELECT *
@@ -245,7 +257,7 @@
 
 # THE REGEXP OPERATOR
 
-    # last_name REGEXP 'value' -> last_name içinde herhangi bir yerinde sadece value içerenleri çağıracak.
+- last_name REGEXP 'value' -> last_name içinde herhangi bir yerinde sadece value içerenleri çağıracak.
 
 ```sql
     SELECT *
@@ -253,7 +265,7 @@
     WHERE last_name REGEXP 'field';
 ```
 
-    # last_name REGEXP '^value' -> last_name must start with value
+- last_name REGEXP '^value' -> last_name must start with value
 
 ```sql
     SELECT *
@@ -261,7 +273,7 @@
     WHERE last_name REGEXP '^field';
 ```
 
-    # last_name REGEXP 'value$' -> last_name must end with value
+- last_name REGEXP 'value$' -> last_name must end with value
 
 ```sql
     SELECT *
@@ -269,8 +281,8 @@
     WHERE last_name REGEXP 'field$';
 ```
 
-    # last_name REGEXP 'valueFirst|valueSecond' -> last_name must contain one of valueFirst & valueSecond
-    # value sayısı daha fazla da olabilir... last_name 'valueFirst|valueSecond|values....'
+- last_name REGEXP 'valueFirst|valueSecond' -> last_name must contain one of valueFirst & valueSecond
+- value sayısı daha fazla da olabilir... last_name 'valueFirst|valueSecond|values....'
 
 ```sql
     SELECT *
@@ -290,8 +302,8 @@
     WHERE last_name REGEXP 'field$|mac|rose';
 ```
 
-    # last_name REGEXP '[gim]e' ->  last_name "ge", "ie", "me" içermelidir.
-    # Yani [] içindeki karakterler (g, i, e) ilk elemanı olurken diğer karakter ise [] dışında kalan karakter (e) olmalıdır.
+- last_name REGEXP '[gim]e' -> last_name "ge", "ie", "me" içermelidir.
+- Yani [] içindeki karakterler (g, i, e) ilk elemanı olurken diğer karakter ise [] dışında kalan karakter (e) olmalıdır.
 
 ```sql
     SELECT *
@@ -299,8 +311,8 @@
     WHERE last_name REGEXP '[gim]e';
 ```
 
-    # last_name REGEXP 'e[fmq]' ->  last_name "ef", "em", "eq" içermelidir.
-    # Yani ilk karakter [] dışında kalan karakter (e)  olurken  [] içindeki karakterler (f, m, q) ise ikinci elemanı olmalıdır.
+- last_name REGEXP 'e[fmq]' -> last_name "ef", "em", "eq" içermelidir.
+- Yani ilk karakter [] dışında kalan karakter (e) olurken [] içindeki karakterler (f, m, q) ise ikinci elemanı olmalıdır.
 
 ```sql
     SELECT *
@@ -329,33 +341,33 @@
 # EXERCISE
 
 ```sql
-SELECT _
-FROM customers
-WHERE first_name REGEXP 'elka|ambur';
+    SELECT *
+    FROM customers
+    WHERE first_name REGEXP 'elka|ambur';
 ```
 
 ```sql
-SELECT _
-FROM customers
-WHERE last*name REGEXP 'ey$|on$';
+    SELECT *
+    FROM customers
+    WHERE last*name REGEXP 'ey$|on$';
 ```
 
 ```sql
-SELECT *
-FROM customers
-WHERE last*name REGEXP '^my|se';
+    SELECT *
+    FROM customers
+    WHERE last*name REGEXP '^my|se';
 ```
 
 ```sql
-SELECT *
-FROM customers
-WHERE last_name REGEXP 'b[ru]';
+    SELECT *
+    FROM customers
+    WHERE last_name REGEXP 'b[ru]';
 ```
 
 ```sql
-SELECT *
-FROM customers
-WHERE last_name REGEXP 'br|bu';
+    SELECT *
+    FROM customers
+    WHERE last_name REGEXP 'br|bu';
 ```
 
 # NULL OPERATOR -> IS NULL mu check ediyorsun
@@ -399,13 +411,13 @@ WHERE last_name REGEXP 'br|bu';
 - Ilk olarak state'e göre sonra ise firstname'e göre sıralayacak..
 
 ```sql
-    SELECT _
+    SELECT *
     FROM customers
     ORDER BY state,first_name;
 ```
 
 ```sql
-    SELECT _
+    SELECT *
     FROM customers
     ORDER BY state DESC,first_name;
 ```
@@ -427,15 +439,15 @@ WHERE last_name REGEXP 'br|bu';
 - AVOID 1,2 yazılırsa 1 column sayısı olduğu için first_name'i ,2 ise last_name gösterir.
 
 ```sql
-  SELECT first_name, last_name
-  FROM customers
-  ORDER BY 1, 2;
+    SELECT first_name, last_name
+    FROM customers
+    ORDER BY 1, 2;
 ```
 
 # EXERCISE
 
 ```sql
-    SELECT _, quantity _ unit_price AS total_price
+    SELECT *, quantity _ unit_price AS total_price
     FROM order_items
     WHERE order_id = 2
     ORDER BY total_price DESC;
@@ -451,8 +463,7 @@ WHERE last_name REGEXP 'br|bu';
     LIMIT 3;
 ```
 
-- LIMIT x, y -> Örnek olarak sayfamıda kullanıcıları listeliyoruz ve her bir sayfada 3 customers old var sayalım. 7. customers'a yani sayfa 3'te bulunan customers'a gitmek
-  için x ile kaç adet geçeceğimizi seçiyoruz ve y ile sonrasında kaç adet alacağımızı belirliyoruz.
+- LIMIT x, y -> Örnek olarak sayfamıda kullanıcıları listeliyoruz ve her bir sayfada 3 customers old var sayalım. 7. customers'a yani sayfa 3'te bulunan customers'a gitmek için x ile kaç adet geçeceğimizi seçiyoruz ve y ile sonrasında kaç adet alacağımızı belirliyoruz.
 
 ```sql
     SELECT *
@@ -463,8 +474,9 @@ WHERE last_name REGEXP 'br|bu';
     LIMIT 6, 1; # 7. customers
 ```
 
+# EXERCISE
+
 ```sql
-    # EXERCISE
     SELECT *
     FROM customers
     ORDER BY points DESC
@@ -634,12 +646,16 @@ WHERE last_name REGEXP 'br|bu';
     o.order_id
   from customers c #Left table ilk ile son gibiler left ile right
   left join orders o #right table ilk ile son gibiler left ile right
-  # Right ile aynı sonuç için
+  # Right ile aynı sonuç için aşağıdaki açıklamayı uygularız.
   # from orders o
   # right join customers c
   on c.customer_id = o.customer_id
   order by c.customer_id;
-  # EXERCISE
+```
+
+# EXERCISE
+
+```sql
   USE sql_store;
   SELECT
   p.product_id,
@@ -648,5 +664,4 @@ WHERE last_name REGEXP 'br|bu';
   FROM products p
   LEFT JOIN order_items oi
   ON p.product_id = oi.product_id;
-
 ```

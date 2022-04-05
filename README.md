@@ -1,12 +1,16 @@
 - -- ile satır açıklama satırı olarak nitelendirilebilir.
 
-### USE metodu kullanılacak veri tabanını seçmemize yarar.
+# USE Metodu
+
+- kullanılacak veri tabanını seçmemize yarar.
 
 ```sql
     USE store;
 ```
 
-### ORDER BY (argüman) -> tablonun argümanına göre sıralamak için,
+# ORDER BY (argüman)
+
+- Tablonun argümanına göre sıralamak için,
 
 ```sql
     SELECT *
@@ -15,9 +19,11 @@
     ORDER BY phone;
 ```
 
-### SELECT (argüman) seçilecek table sütünu { info: " (\*) ise tüm sütünlar " },
+# SELECT (argüman)
 
-### FROM (argüman) -> argümana göre hangi tablo seçimi,
+- Seçilecek table sütünu { info: " (\*) ise tüm sütünlar " },
+
+* FROM (argüman) -> argümana göre hangi tablo seçimi,
 
 ```sql
     SELECT customer_id, first_name, points
@@ -25,9 +31,11 @@
     WHERE customer_id = 1;
 ```
 
-### Direkt olarak matematiksel işlemler uygulanabilir. AS ile set name
+- Direkt olarak matematiksel işlemler uygulanabilir. AS ile set name
 
-### AS (argüman) -> değişken (argüman) olarak tanımlanması için,
+# AS (argüman)
+
+- Değişken (argüman) olarak tanımlanması için,
 
 - argüman da boşluk girmek için tırnak içerisinde olmalı,
 
@@ -42,7 +50,7 @@
     FROM customers;
 ```
 
-### store.customers altındaki id'si 1 olan elemanın city değerinin "Waltham" olarak set et.
+- store.customers altındaki id'si 1 olan elemanın city değerinin "Waltham" olarak set et.
 
 ```sql
     SELECT state FROM customers;
@@ -50,7 +58,7 @@
     UPDATE `store`.`customers` SET `city` = 'Waltham' WHERE (`customer_id` = '1');
 ```
 
-### DISTINCT -> ile eşşiz elemanları getirmek için,
+# DISTINCT -> ile eşşiz elemanları getirmek için,
 
 ```sql
     SELECT DISTINCT state FROM customers;
@@ -63,16 +71,16 @@
     FROM products;
 ```
 
-### Comparison Opretors ->
+# Comparison Opretors
 
-- (>) (gt),
-- (>=) (gte),
-- (<) (lt),
-- (<=) (lte),
-- (=) (equality),
-- (!=) (not equal), <> (not equal)
+- > (>) (gt), without paranthasis
+- > (>=) (gte), without paranthasis
+- > (<) (lt), without paranthasis
+- > (<=) (lte), without paranthasis
+- > (=) (equality), without paranthasis
+- > (!=) (not equal), (<>) (not equal) without paranthasis
 
-### WHERE (argüman) -> tablonun argümanına göre şartlı seçme için,
+* WHERE (argüman) -> tablonun argümanına göre şartlı seçme için,
 
 ```sql
     SELECT *
@@ -110,7 +118,7 @@
     WHERE order_date >= '2019-01-01';
 ```
 
-### AND (Tüm şartlar doğru ise), OR (En az biri doğru ise) & NOT ()
+# AND (Tüm şartlar doğru ise), OR (En az biri doğru ise) & NOT (Değili)
 
 ```sql
     SELECT *
@@ -124,7 +132,7 @@
     WHERE birth_date > '1990-01-01' OR points > 1000;
 ```
 
-### AND operator ilk çalışır sonrasında OR çalışır öncelik sırasından dolayı
+- AND operator ilk çalışır sonrasında OR çalışır öncelik sırasından dolayı
 
 ```sql
     SELECT *
@@ -132,7 +140,7 @@
     WHERE birth_date > '1990-01-01' OR points > 1000 AND state = 'VA';
 ```
 
-### NOT ile parantez önemli şartı sağlamayanlar gelecek...
+- NOT ile parantez önemli şartı sağlamayanlar gelecek...
 
 ```sql
     SELECT *
@@ -140,37 +148,47 @@
     WHERE NOT (birth_date > '1990-01-01' OR points > 1000);
 ```
 
-### Yukarısı ile aynı NOT parantez içine dağıldı.
+- Yukarısı ile aynı NOT parantez içine dağıldı.
 
 ```sql
     SELECT *
     FROM customers
     WHERE birth_date <= '1990-01-01' AND points <= 1000;
+```
+
+```sql
     SELECT *
     FROM order_items
     WHERE order_id = 6 AND unit_price * quantity > 30;
 ```
 
-### IN operators -> Birden fazla (veya) sorgu da kullanılır
+# IN operators
+
+- Birden fazla (veya) sorgu da kullanılır
 
 ```sql
     SELECT *
     FROM customers
-    # WHERE state = 'VA' OR state = 'GA' OR state = 'FL'
+    * WHERE state = 'VA' OR state = 'GA' OR state = 'FL'
     WHERE state IN ('VA', 'FL', 'GA');
 ```
 
 ```sql
     SELECT *
     FROM customers
-    # WHERE state = 'VA' OR state = 'GA' OR state = 'FL'
+    * WHERE state = 'VA' OR state = 'GA' OR state = 'FL'
     WHERE state NOT IN ('VA', 'FL', 'GA');
+```
+
+```sql
     SELECT *
     FROM products
     WHERE quantity_in_stock IN (49, 38, 72);
 ```
 
-### BETWEEN OPERATOR -> BETWEEN (GTE) AND (LTE)
+# BETWEEN OPERATOR
+
+- BETWEEN (GTE) AND (LTE)
 
 ```sql
     SELECT *
@@ -190,9 +208,11 @@
     WHERE birth_date BETWEEN '1990-01-01' AND '2000-01-01';
 ```
 
-### LIKE OPERATOR LIKE (VALUE) {info (%): any number of characters, info (\_): single character }
+# LIKE OPERATOR LIKE (VALUE)
 
-- VALUE = 'A%' -> string A veya a ile başlayanları,
+- {info (%): any number of characters, info (\_): single character }
+
+* VALUE = 'A%' -> string A veya a ile başlayanları,
 
 ```sql
     SELECT *
@@ -208,7 +228,9 @@
     WHERE last_name LIKE '%Y';
 ```
 
-- VALUE = '%A%' -> string A veya a'yı HERHANGİ BİR YERİNDE içerenleri,
+# VALUE = '%A%'
+
+- string A veya a'yı HERHANGİ BİR YERİNDE içerenleri,
 
 ```sql
     SELECT *
@@ -241,7 +263,7 @@
     WHERE last_name LIKE 'b____y';
 ```
 
-# EXAMPLES
+- EXAMPLES
 
 ```sql
     SELECT *
@@ -252,7 +274,7 @@
 ```sql
     SELECT *
     FROM customers
-    WHERE phone LIKE '%9'; # phone number end with 9
+    WHERE phone LIKE '%9'; * phone number end with 9
 ```
 
 # THE REGEXP OPERATOR
@@ -282,7 +304,7 @@
 ```
 
 - last_name REGEXP 'valueFirst|valueSecond' -> last_name must contain one of valueFirst & valueSecond
-- value sayısı daha fazla da olabilir... last_name 'valueFirst|valueSecond|values....'
+- value sayısı daha fazla da olabilir... last_name 'valueFirst | valueSecond | values....'
 
 ```sql
     SELECT *
@@ -330,7 +352,7 @@
     WHERE last_name REGEXP '[a-h]e';
 ```
 
-# ALL OF
+- ALL OF
 
 > - ^ beginning
 > - $ end
@@ -370,7 +392,9 @@
     WHERE last_name REGEXP 'br|bu';
 ```
 
-# NULL OPERATOR -> IS NULL mu check ediyorsun
+# NULL OPERATOR
+
+- IS NULL mu check ediyorsun
 
 ```sql
     SELECT *
@@ -384,7 +408,7 @@
     WHERE phone IS NOT NULL;
 ```
 
-# EXERCISE
+- EXERCISE
 
 ```sql
     SELECT *
@@ -392,7 +416,9 @@
     WHERE shipper_id IS NULL;
 ```
 
-# THE ORDER BY CLAUSE -> sort column
+# THE ORDER BY CLAUSE
+
+- sort column
 
 ```sql
     SELECT *
@@ -444,7 +470,7 @@
     ORDER BY 1, 2;
 ```
 
-# EXERCISE
+- EXERCISE
 
 ```sql
     SELECT *, quantity _ unit_price AS total_price
@@ -453,9 +479,9 @@
     ORDER BY total_price DESC;
 ```
 
-# LIMIT CLAUSE
+- LIMIT CLAUSE
 
-- ILK 3 ADET customers table'sından veri gelecek.
+* ILK 3 ADET customers table'sından veri gelecek.
 
 ```sql
     SELECT *
@@ -463,18 +489,20 @@
     LIMIT 3;
 ```
 
-- LIMIT x, y -> Örnek olarak sayfamıda kullanıcıları listeliyoruz ve her bir sayfada 3 customers old var sayalım. 7. customers'a yani sayfa 3'te bulunan customers'a gitmek için x ile kaç adet geçeceğimizi seçiyoruz ve y ile sonrasında kaç adet alacağımızı belirliyoruz.
+# LIMIT x, y
+
+- Örnek olarak sayfamızda kullanıcıları listeliyoruz ve her bir sayfada 3 customers old var sayalım. 7. customers'a yani sayfa 3'te bulunan customers'a gitmek için x ile kaç adet geçeceğimizi seçiyoruz ve y ile sonrasında kaç adet alacağımızı belirliyoruz.
 
 ```sql
     SELECT *
     FROM customers
-    LIMIT 6, 3; # 6. 7. ve 8. customers
+    LIMIT 6, 3; * 6. 7. ve 8. customers
     SELECT *
     FROM customers
-    LIMIT 6, 1; # 7. customers
+    LIMIT 6, 1; * 7. customers
 ```
 
-# EXERCISE
+- EXERCISE
 
 ```sql
     SELECT *
@@ -584,7 +612,7 @@
     	ON o.status = os.order_status_id;
 ```
 
-# EXERCISE
+- EXERCISE
 
 ```sql
     USE sql_invoicing;
@@ -626,7 +654,7 @@
     ON o.customer_id = c.customer_id;
 ```
 
-### YOL - 2 -> implicit join syntax
+- YOL - 2 -> implicit join syntax
 
 ```sql
     SELECT *
@@ -644,16 +672,16 @@
     c.customer_id,
     c.first_name,
     o.order_id
-  from customers c #Left table ilk ile son gibiler left ile right
-  left join orders o #right table ilk ile son gibiler left ile right
-  # Right ile aynı sonuç için aşağıdaki açıklamayı uygularız.
-  # from orders o
-  # right join customers c
+  from customers c *Left table ilk ile son gibiler left ile right
+  left join orders o *right table ilk ile son gibiler left ile right
+  * Right ile aynı sonuç için aşağıdaki açıklamayı uygularız.
+  * from orders o
+  * right join customers c
   on c.customer_id = o.customer_id
   order by c.customer_id;
 ```
 
-# EXERCISE
+- EXERCISE
 
 ```sql
   USE sql_store;

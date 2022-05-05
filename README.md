@@ -693,3 +693,92 @@
   LEFT JOIN order_items oi
   ON p.product_id = oi.product_id;
 ```
+
+# OUTER JOIN BETWEEN MULTİPLE TABLES
+
+```sql
+    USE sql_store;
+	SELECT
+		c.customer_id,
+        c.first_name,
+        o.order_id,
+        sh.name AS shipper
+    FROM customers c #Left table ilk ile son gibiler left ile right
+    LEFT JOIN orders o #right table ilk ile son gibiler left ile right
+    # Right ile aynı sonuç için
+    # from orders o
+	# right join customers c
+    #yazorders
+		ON c.customer_id = o.customer_id
+	# kod okunurluğu için inner join yerine left joini kullanmak yada
+    # tek olarak left / right join kullanmak okunurluğu arttırırken karmaşıklığı azaltır.
+    LEFT JOIN shippers sh
+		ON o.shipper_id = sh.shipper_id
+	ORDER BY c.customer_id;
+```
+
+- EXERCISE
+
+```sql
+	USE sql_store;
+	SELECT o.order_id,
+		o.order_date,
+        c.first_name AS customer,
+        sh.name AS shipper,
+        os.name AS status
+    FROM orders o
+    JOIN customers c # her orders'ın customers'ı olduğı için inner join kullanıldı
+		ON o.customer_id = c.customer_id
+    LEFT JOIN shippers sh
+		ON o.shipper_id = sh.shipper_id
+	#ORDER BY c.customer_id;
+    JOIN order_statuses os
+		ON o.status = os.order_status_id
+```
+
+# THE USING CLAUSE
+
+```sql
+ USE sql_store;
+    SELECT
+		o.order_id,
+        c.first_name,
+        sh.name AS shipper
+    FROM orders o
+    JOIN customers c
+		-- ON e.reports_to = m.employee_id
+        -- Using ile tablolar arasında (e, m) ortak olarak eşleşenleri
+        -- kodun okunması için daha kolay olarak yazabiliriz.
+        USING (customer_id)
+    LEFT JOIN shippers sh
+		USING (shipper_id);
+```
+
+## MULTIPLE USING CLAUSE
+
+```sql
+    SELECT *
+		FROM order_items oi
+        JOIN order_item_notes oin
+        # ON oi.order_id = oin.order_id AND
+		#	oi.product_id = oin.product_id
+        # yerine aşağıdaki gibi şart ile kontrol edilebilir.
+        USING (order_id, product_id);
+        # ...
+```
+
+- EXERCISE
+
+```sql
+	USE sql_invoicing;
+		SELECT
+			p.date,
+            c.name AS client,
+            p.amount,
+            pm.name AS payment_method
+		FROM payments p
+		JOIN clients c
+			USING (client_id)
+		JOIN payment_methods pm
+			ON p.payment_method = pm.payment_method_id
+```

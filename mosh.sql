@@ -402,6 +402,56 @@ WHERE birth_date BETWEEN '1990-01-01' AND '2000-01-01';
     FROM products p
     LEFT JOIN order_items oi
 		ON p.product_id = oi.product_id;
+	# OUTER JOIN BETWEEN MULTİPLE TABLES
+    USE sql_store;
+	SELECT 
+		c.customer_id,
+        c.first_name,
+        o.order_id, 
+        sh.name AS shipper
+    FROM customers c #Left table ilk ile son gibiler left ile right
+    LEFT JOIN orders o #right table ilk ile son gibiler left ile right
+    # Right ile aynı sonuç için
+    # from orders o
+	# right join customers c 
+    #yazorders
+		ON c.customer_id = o.customer_id
+	# kod okunurluğu için inner join yerine left joini kullanmak yada 
+    # tek olarak left / right join kullanmak okunurluğu arttırırken karmaşıklığı azaltır.
+    LEFT JOIN shippers sh
+		ON o.shipper_id = sh.shipper_id
+	ORDER BY c.customer_id;
+    # EXERCISE
+	USE sql_store;
+	SELECT o.order_id,
+		o.order_date,
+        c.first_name AS customer,
+        sh.name AS shipper,
+        os.name AS status
+    FROM orders o 
+    JOIN customers c # her orders'ın customers'ı olduğı için inner join kullanıldı
+		ON o.customer_id = c.customer_id
+    LEFT JOIN shippers sh
+		ON o.shipper_id = sh.shipper_id
+	#ORDER BY c.customer_id;
+    JOIN order_statuses os 
+		ON o.status = os.order_status_id;
+        
+	# SELF OUTER JOIN 
+    USE sql_hr;
+    SELECT 
+		e.employee_id,
+        e.first_name,
+        m.first_name AS manager
+    FROM employees e
+    JOIN employees m 
+		ON e.reports_to = m.employee_id
+	ORDER BY e.first_name;
+    
+    
+        
+
+    
     
     
     
